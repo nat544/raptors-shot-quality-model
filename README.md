@@ -6,8 +6,7 @@ made?) from *where* on the court a shot was taken combined with *when* in the
 game it happened and the context at that moment (score margin, clutch time).
 
 Data comes from ESPN's public NBA API. Note: NBA's own stats.nba.com API blocks most cloud/datacenter
-network ranges at the network level (confirmed while building this — direct
-requests timed out even with full browser headers), which is why this project
+network ranges at the network level, which is why this project
 uses ESPN's API instead. 
 
 ## Pipeline
