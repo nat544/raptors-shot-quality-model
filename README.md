@@ -41,6 +41,19 @@ jupyter notebook raptors_shot_quality_model.ipynb
 The notebook pulls a small sample (20 games) by default so it runs in under a
 minute — widen `MAX_GAMES` (up to 82) for a full-season, more robust sample.
 
+## Testing
+
+```bash
+pytest tests/
+```
+
+27 unit tests cover the pure logic that doesn't require live network calls:
+game-clock math across regulation and overtime, the rim-shot distance
+imputation and clutch/three-point flags, the shot-distance text parser, and
+the play-by-play extraction logic (team/free-throw filtering, score-margin
+calculation, clock parsing) — all using small hand-built ESPN-shaped
+fixtures rather than hitting the live API.
+
 ## Results (sample run, ~1,800 shots from 20 games)
 
 - ROC-AUC: ~0.67
