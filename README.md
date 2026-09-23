@@ -5,12 +5,9 @@ demonstrate **spatio-temporal modeling**: predicting an outcome (was this shot
 made?) from *where* on the court a shot was taken combined with *when* in the
 game it happened and the context at that moment (score margin, clutch time).
 
-Data comes from ESPN's public NBA API — no API key or paid data source
-required. Note: NBA's own stats.nba.com API blocks most cloud/datacenter
-network ranges at the network level (confirmed while building this — direct
-requests timed out even with full browser headers), which is why this project
-uses ESPN's API instead. That's the same workaround the open sports-analytics
-community commonly reaches for.
+Data comes from ESPN's public NBA API. Note: NBA's own stats.nba.com API blocks most cloud/datacenter
+network ranges at the network level, which is why this project
+uses ESPN's API instead. 
 
 ## Pipeline
 
@@ -59,30 +56,9 @@ fixtures rather than hitting the live API.
 - ROC-AUC: ~0.67
 - Make rate in sample: ~46% (consistent with real NBA field-goal percentages)
 
-**On the ROC-AUC**: this is meaningfully lower than what the companion NHL xG
-project achieves (~0.86), and that's expected, not a shortcoming of the
-pipeline. Shot location and game time explain only part of whether an NBA
+**On the ROC-AUC**: this is meaningfully lower than what NHL xG
+project achieves (~0.86), and that's expected. Shot location and game time explain only part of whether an NBA
 shot goes in — the biggest driver of make probability is defender proximity
 and contest level, which isn't available from box-score-level play-by-play.
-Capturing that requires real player-tracking data (the kind pro teams collect
-internally, and the kind referenced in job postings that ask for
-"spatio-temporal tracking data" analysis). This model is an honest baseline
-built entirely on public data, with that limitation stated plainly rather
-than papered over.
+Capturing that requires real player-tracking data.
 
-## Why this project
-
-Built to demonstrate hands-on **spatio-temporal modeling** — combining
-spatial (location) and temporal (game-time/context) features into a single
-predictive model — for a team MLSE actually owns, using data that is
-genuinely public and reproducible.
-
-## Possible extensions
-
-- Pull a full season (`MAX_GAMES=82`) for a more robust model.
-- Parse more shot-type detail from ESPN's play text (catch-and-shoot vs.
-  pull-up, transition vs. half-court).
-- Compare against a simple logistic-regression baseline (distance + angle
-  only) to quantify how much the temporal/context features actually add.
-- Aggregate per-player actual-vs-expected make rate to find over/under-
-  performing shooters relative to shot quality (a "shooting skill" analysis).
